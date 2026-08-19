@@ -118,18 +118,32 @@
     .tour-body p { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.8; }
     .tour-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px solid var(--border); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; }
 
-    /* Galleries */
+    /* Galleries - Immersive Cinematic Editorial Style */
     .gallery-nav { display: flex; gap: 30px; margin-bottom: 40px; list-style: none; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; flex-wrap: wrap; }
     .gallery-nav li { cursor: pointer; color: var(--text-muted); padding-bottom: 4px; border-bottom: 1px solid transparent; transition: all 0.3s; }
     .gallery-nav li.active, .gallery-nav li:hover { color: var(--text); border-bottom-color: var(--accent); }
-    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    @media (max-width: 900px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } .nav-links { display: none; } .about-container { grid-template-columns: 1fr !important; gap: 40px !important; } }
-    @media (max-width: 600px) { .gallery-grid { grid-template-columns: 1fr; } }
-    .gallery-item { position: relative; height: 400px; overflow: hidden; border: 1px solid var(--border); cursor: pointer; display: block; }
-    .gallery-item img { transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-    .gallery-item:hover img { transform: scale(1.08); }
-    .gallery-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px; background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.75) 100%); color: #fff; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0; transition: opacity 0.4s ease; display: flex; justify-content: space-between; align-items: center; }
-    .gallery-item:hover .gallery-caption { opacity: 1; }
+    
+    .gallery-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
+    @media (max-width: 900px) { .gallery-grid { display: flex; flex-direction: column; } .nav-links { display: none; } .about-container { grid-template-columns: 1fr !important; gap: 40px !important; } }
+    
+    .gallery-item { position: relative; height: 500px; overflow: hidden; border: 1px solid var(--border); cursor: pointer; display: block; grid-column: span 6; background: #0c0c0c; }
+    .gallery-item:nth-child(3n+1) { grid-column: span 12; height: 600px; }
+    .gallery-item:nth-child(3n+2) { grid-column: span 7; }
+    .gallery-item:nth-child(3n+3) { grid-column: span 5; }
+
+    .gallery-item img { transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease; filter: brightness(0.92); }
+    .gallery-item:hover img { transform: scale(1.06); filter: brightness(1); }
+    
+    .gallery-caption { 
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 40px; 
+      background: linear-gradient(180deg, transparent 0%, rgba(8,8,8,0.85) 100%); 
+      color: #fff; transform: translateY(10px); opacity: 0; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
+      display: flex; justify-content: space-between; align-items: flex-end; 
+    }
+    .gallery-item:hover .gallery-caption { opacity: 1; transform: translateY(0); }
+    .gallery-caption-title { font-family: var(--font-serif); font-size: 28px; letter-spacing: 0.05em; font-weight: 400; margin-bottom: 4px; }
+    .gallery-caption-sub { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); }
+    .gallery-action-hint { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; border-bottom: 1px solid var(--accent); padding-bottom: 2px; color: #fff; }
 
     /* Stories */
     .stories-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
@@ -307,67 +321,87 @@
     .modal-title { font-family: var(--font-serif); font-size: 32px; margin-bottom: 6px; }
     .modal-subtitle { font-size: 12px; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 25px; display: block; }
 
-    /* Lightbox Gallery Modal */
+    /* Immersive Fullscreen Cinematic Lightbox Gallery */
     .lightbox-modal {
       display: none;
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(12, 12, 12, 0.85);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: rgba(6, 6, 6, 0.96);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
       z-index: 4000;
       justify-content: center;
       align-items: center;
       flex-direction: column;
       padding: 40px;
       opacity: 0;
-      transition: opacity 0.4s ease;
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .lightbox-modal.active { display: flex; opacity: 1; }
+    
+    .lightbox-top-bar {
+      position: absolute;
+      top: 30px; left: 50px; right: 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 4010;
+    }
+    .lightbox-category-tag {
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 6px 16px;
+    }
+
     .lightbox-content {
       position: relative;
-      max-width: 85vw;
-      max-height: 70vh;
+      max-width: 88vw;
+      max-height: 68vh;
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-top: 20px;
     }
     .lightbox-content img {
-      max-width: 100%;
-      max-height: 70vh;
+      max-width: 88vw;
+      max-height: 68vh;
       object-fit: contain;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.7);
       border-radius: 2px;
-      animation: zoomInSmooth 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: cinematicFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
-    @keyframes zoomInSmooth {
-      from { transform: scale(0.96); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+    @keyframes cinematicFadeIn {
+      from { transform: scale(0.97) translateY(10px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1; }
     }
     .lightbox-close {
-      position: absolute;
-      top: 35px;
-      right: 45px;
-      font-size: 32px;
-      color: rgba(255, 255, 255, 0.6);
+      font-size: 28px;
+      color: rgba(255, 255, 255, 0.7);
       cursor: pointer;
-      background: none;
-      border: none;
-      z-index: 4010;
-      transition: color 0.3s;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s ease;
     }
-    .lightbox-close:hover { color: #fff; }
+    .lightbox-close:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+    
     .lightbox-nav {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.04);
       color: rgba(255, 255, 255, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      width: 54px; height: 54px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      width: 64px; height: 64px;
       border-radius: 50%;
-      font-size: 18px;
+      font-size: 20px;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -375,24 +409,30 @@
       transition: all 0.3s ease;
       z-index: 4010;
     }
-    .lightbox-nav:hover { background: var(--accent); border-color: var(--accent); color: #fff; transform: translateY(-50%) scale(1.05); }
+    .lightbox-nav:hover { background: var(--accent); border-color: var(--accent); color: #fff; transform: translateY(-50%) scale(1.08); }
     .lightbox-prev { left: 40px; }
     .lightbox-next { right: 40px; }
-    .lightbox-counter {
-      margin-top: 24px;
-      color: rgba(255, 255, 255, 0.5);
-      font-size: 10px;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
+    
+    .lightbox-footer-info {
+      position: absolute;
+      bottom: 35px;
+      left: 0; right: 0;
+      text-align: center;
+      z-index: 4010;
     }
     .lightbox-title-bar {
-      margin-bottom: 24px;
       color: #fff;
       font-family: var(--font-serif);
-      font-size: 26px;
+      font-size: 28px;
       letter-spacing: 0.08em;
       font-weight: 400;
-      text-align: center;
+      margin-bottom: 6px;
+    }
+    .lightbox-counter {
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
     }
 
     .form-group { margin-bottom: 18px; }
@@ -606,25 +646,32 @@
     </div>
 
     <div class="gallery-grid">
-      <div class="gallery-item" data-category="avian" onclick="openLightbox('avian')"><img src="avian.jpg" alt="Avian"><div class="gallery-caption"><span data-i18n="filter-avian">Avian</span><span style="font-size: 9px;" data-i18n="view-album">View Gallery →</span></div></div>
-      <div class="gallery-item" data-category="wildlife" onclick="openLightbox('wildlife')"><img src="wildlife.jpg" alt="Wildlife"><div class="gallery-caption"><span data-i18n="filter-wildlife">Wildlife</span><span style="font-size: 9px;" data-i18n="view-album">View Gallery →</span></div></div>
-      <div class="gallery-item" data-category="portraits" onclick="openLightbox('portraits')"><img src="portraits.jpg" alt="Portraits"><div class="gallery-caption"><span data-i18n="filter-portraits">Portraits</span><span style="font-size: 9px;" data-i18n="view-album">View Gallery →</span></div></div>
-      <div class="gallery-item" data-category="urban" onclick="openLightbox('urban')"><img src="urban.jpg" alt="Urban"><div class="gallery-caption"><span data-i18n="filter-urban">Urban</span><span style="font-size: 9px;" data-i18n="view-album">View Gallery →</span></div></div>
-      <div class="gallery-item" data-category="landscapes" onclick="openLightbox('landscapes')"><img src="landscapes.jpg" alt="Landscapes"><div class="gallery-caption"><span data-i18n="filter-landscapes">Landscapes</span><span style="font-size: 9px;" data-i18n="view-album">View Gallery →</span></div></div>
-      <div class="gallery-item" data-category="heritage" onclick="openLightbox('heritage')"><img src="heritage.jpg" alt="Heritage"><div class="gallery-caption"><span data-i18n="filter-heritage">Heritage</span><span style="font-size: 9px;" data-i18n="view-album">View Gallery →</span></div></div>
+      <div class="gallery-item" data-category="avian" onclick="openLightbox('avian')"><img src="avian.jpg" alt="Avian"><div class="gallery-caption"><div><div class="gallery-caption-sub" data-i18n="filter-avian">Avian</div><div class="gallery-caption-title">Dalmatian Pelican in Flight</div></div><span class="gallery-action-hint" data-i18n="view-album">Immersive View</span></div></div>
+      <div class="gallery-item" data-category="wildlife" onclick="openLightbox('wildlife')"><img src="wildlife.jpg" alt="Wildlife"><div class="gallery-caption"><div><div class="gallery-caption-sub" data-i18n="filter-wildlife">Wildlife</div><div class="gallery-caption-title">Highland Chamois at Dawn</div></div><span class="gallery-action-hint" data-i18n="view-album">Immersive View</span></div></div>
+      <div class="gallery-item" data-category="portraits" onclick="openLightbox('portraits')"><img src="portraits.jpg" alt="Portraits"><div class="gallery-caption"><div><div class="gallery-caption-sub" data-i18n="filter-portraits">Portraits</div><div class="gallery-caption-title">Rhodope Field Portrait</div></div><span class="gallery-action-hint" data-i18n="view-album">Immersive View</span></div></div>
+      <div class="gallery-item" data-category="urban" onclick="openLightbox('urban')"><img src="urban.jpg" alt="Urban"><div class="gallery-caption"><div><div class="gallery-caption-sub" data-i18n="filter-urban">Urban</div><div class="gallery-caption-title">Ancient Plovdiv Alleys</div></div><span class="gallery-action-hint" data-i18n="view-album">Immersive View</span></div></div>
+      <div class="gallery-item" data-category="landscapes" onclick="openLightbox('landscapes')"><img src="landscapes.jpg" alt="Landscapes"><div class="gallery-caption"><div><div class="gallery-caption-sub" data-i18n="filter-landscapes">Landscapes</div><div class="gallery-caption-title">Rila Glacial Silence</div></div><span class="gallery-action-hint" data-i18n="view-album">Immersive View</span></div></div>
+      <div class="gallery-item" data-category="heritage" onclick="openLightbox('heritage')"><img src="heritage.jpg" alt="Heritage"><div class="gallery-caption"><div><div class="gallery-caption-sub" data-i18n="filter-heritage">Heritage</div><div class="gallery-caption-title">Thracian Golden Echoes</div></div><span class="gallery-action-hint" data-i18n="view-album">Immersive View</span></div></div>
     </div>
   </section>
 
-  <!-- Single-Image Lightbox Modal -->
+  <!-- Immersive Fullscreen Lightbox Modal -->
   <div class="lightbox-modal" id="lightbox-modal">
-    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
-    <div class="lightbox-title-bar" id="lightbox-title">Gallery</div>
+    <div class="lightbox-top-bar">
+      <div class="lightbox-category-tag" id="lightbox-category-tag">AVISIA GALLERY</div>
+      <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    </div>
+    
     <div class="lightbox-content">
       <button class="lightbox-nav lightbox-prev" onclick="changeImage(-1)">&#10094;</button>
       <img id="lightbox-img" src="" alt="Gallery Image">
       <button class="lightbox-nav lightbox-next" onclick="changeImage(1)">&#10095;</button>
     </div>
-    <div class="lightbox-counter" id="lightbox-counter">1 / 3</div>
+
+    <div class="lightbox-footer-info">
+      <div class="lightbox-title-bar" id="lightbox-title">Gallery</div>
+      <div class="lightbox-counter" id="lightbox-counter">1 / 3</div>
+    </div>
   </div>
 
   <!-- About Section ("Our Ethos") -->
@@ -747,15 +794,13 @@
     </div>
   </div>
 
-  <!-- Creator / Guide Modal (Updated with Photo & Interview) -->
+  <!-- Creator / Guide Modal -->
   <div class="creator-modal" id="creator-modal">
     <div class="modal-container" style="max-width: 800px;">
       <span class="modal-close" onclick="closeCreatorModal()">&times;</span>
       <span class="modal-subtitle" data-i18n="creator-modal-sub">Founder &amp; Field Guide</span>
       <h2 class="modal-title" data-i18n="creator-modal-title" style="margin-bottom: 25px;">Behind the Lens: The Vision &amp; The Guide</h2>
-      <div class="creator-content" id="creator-modal-body">
-        <!-- Content injected dynamically based on language -->
-      </div>
+      <div class="creator-content" id="creator-modal-body"></div>
       <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); text-align: right;">
         <button class="btn-primary" onclick="closeCreatorModal()" data-i18n="btn-close">Close Window</button>
       </div>
@@ -1023,30 +1068,36 @@
       }
     };
 
-    // Galleries Lightbox Data
+    // Galleries Immersive Lightbox Data
     const galleryData = {
       avian: {
-        title: { en: "Avian Gallery", bg: "Галерия Птици" },
+        title: { en: "Avian Gallery • Masterpieces", bg: "Галерия Птици • Шедьоври" },
+        categoryTag: { en: "Avian Wildlife", bg: "Птичи свят" },
         images: ["avian.jpg", "avian-2.jpg", "avian-3.jpg"]
       },
       wildlife: {
-        title: { en: "Wildlife Gallery", bg: "Галерия Дива природа" },
+        title: { en: "Wildlife Gallery • Masterpieces", bg: "Галерия Дива природа • Шедьоври" },
+        categoryTag: { en: "Wild Fauna", bg: "Дива фауна" },
         images: ["wildlife.jpg", "wildlife-2.jpg", "wildlife-3.jpg"]
       },
       portraits: {
-        title: { en: "Portraits Gallery", bg: "Галерия Портрети" },
+        title: { en: "Portraits Gallery • Masterpieces", bg: "Галерия Портрети • Шедьоври" },
+        categoryTag: { en: "Field Portraits", bg: "Портрети от терен" },
         images: ["portraits.jpg", "portraits-2.jpg", "portraits-3.jpg"]
       },
       urban: {
-        title: { en: "Urban Gallery", bg: "Галерия Градска среда" },
+        title: { en: "Urban Gallery • Masterpieces", bg: "Галерия Градска среда • Шедьоври" },
+        categoryTag: { en: "Culture & Urban", bg: "Култура & град" },
         images: ["urban.jpg", "urban-2.jpg", "urban-3.jpg"]
       },
       landscapes: {
-        title: { en: "Landscapes Gallery", bg: "Галерия Пейзажи" },
+        title: { en: "Landscapes Gallery • Masterpieces", bg: "Галерия Пейзажи • Шедьоври" },
+        categoryTag: { en: "Alpine & Nature", bg: "Алпийски пейзажи" },
         images: ["landscapes.jpg", "landscapes-2.jpg", "landscapes-3.jpg"]
       },
       heritage: {
-        title: { en: "Heritage Gallery", bg: "Галерия Наследство" },
+        title: { en: "Heritage Gallery • Masterpieces", bg: "Галерия Наследство • Шедьоври" },
+        categoryTag: { en: "Ancient Heritage", bg: "Историческо наследство" },
         images: ["heritage.jpg", "heritage-2.jpg", "heritage-3.jpg"]
       }
     };
@@ -1206,7 +1257,7 @@
       });
     });
 
-    // Lightbox Single-Image Viewer Logic
+    // Immersive Lightbox Viewer Logic
     let currentGalleryKey = null;
     let currentImageIndex = 0;
 
@@ -1240,8 +1291,9 @@
     function updateLightboxContent() {
       const gallery = galleryData[currentGalleryKey];
       document.getElementById('lightbox-title').textContent = gallery.title[currentLang];
+      document.getElementById('lightbox-category-tag').textContent = gallery.categoryTag[currentLang];
       document.getElementById('lightbox-img').src = gallery.images[currentImageIndex];
-      document.getElementById('lightbox-counter').textContent = `${currentImageIndex + 1} / ${gallery.images.length}`;
+      document.getElementById('lightbox-counter').textContent = `FRAME ${currentImageIndex + 1} / ${gallery.images.length}`;
     }
 
     // Keyboard navigation
@@ -1255,10 +1307,10 @@
 
     const translations = {
       en: {
-        "page-title": "AVISIA.tours — The world, seen differently", "tagline": "The world, seen differently", "nav-journeys": "Destinations", "nav-galleries": "Galleries", "nav-about": "About", "nav-stories": "Stories", "nav-contact": "Contact", "hero-title": "Guided by nature, defined by detail.", "hero-desc": "Small groups. Local expertise. Remarkable places. From regional sanctuaries to remote tropical wilderness, explored with patience and purpose.", "hero-btn": "Discover Destinations", "journeys-sub": "Curated Portfolio", "journeys-title": "Destinations", "tour1-meta": "Northern Greece • 4 Days", "tour1-title": "Lake Kerkini: The Golden Pelican Sanctuary", "tour1-desc": "Exclusive early-morning boat charters to shoot Dalmatian Pelicans.", "tour1-tag": "Birdwatching & Fine-Art", "tour2-meta": "Black Sea Coast • 5 Days", "tour2-title": "Burgas Wetlands & Coastal Migration", "tour2-desc": "Navigate saline lagoons during peak migration.", "tour2-tag": "Lagoons & Migration", "tour3-meta": "Rila Mountain Range • 6 Days", "tour3-title": "Rila Highlands & Alpine Fauna", "tour3-desc": "Alpine landscape and high-altitude wildlife photography.", "tour3-tag": "Alpine Landscapes", "tour4-meta": "Central America • 11 Days", "tour4-title": "Costa Rica: Canopy Light & Cloud Forests", "tour4-desc": "From Quetzals in cloud forests to hummingbird setups & rainforest canals.", "tour4-tag": "Tropical Biodiversity", "tour5-meta": "Indian Ocean • 12 Days", "tour5-title": "Sri Lanka: Ancient Realms & Wild Horizons", "tour5-desc": "Track leopards, elephants, and endemic birds in ancient ecosystems.", "tour5-tag": "Big Mammals & Rainforest", "book-now": "View Program & Book →", "galleries-sub": "Visual Portfolio", "galleries-title": "Curated Galleries", "filter-all": "All Galleries", "filter-avian": "Avian", "filter-wildlife": "Wildlife", "filter-portraits": "Portraits", "filter-urban": "Urban", "filter-landscapes": "Landscapes", "filter-heritage": "Heritage", "view-album": "View Gallery →", "about-sub": "Our Ethos", "about-title": "Deep Unrushed Experiences.", "about-desc": "AVISIA was born from a desire to redefine photography travel in the Southern Balkans. We move away from rushed itineraries, favoring slow, deliberate exploration guided by natural light. By combining deep ecological knowledge with patient field craft, we offer intimate encounters with wild landscapes and rare species. Every journey is designed to foster a profound connection with nature, leaving time for authentic artistic expression.", "about-btn": "Request Private Journey", "creator-btn": "Meet Your Guide", "creator-modal-sub": "Founder & Field Guide", "creator-modal-title": "Behind the Lens: The Vision & The Guide", "stories-sub": "Editorial & Insights", "stories-title": "Field Stories", "read-story": "Read Story →", "reviews-sub": "Traveler Testimonials", "reviews-title": "TripAdvisor Reviews", "review1-text": "\"We had a fantastic day exploring remarkable nature spots near Sofia. Our guide possessed exceptional knowledge of birds and local ecology, making the whole trip not only fruitful for photography, but also extremely interesting. Highly recommended to any nature lover!\"", "review1-loc": "TripAdvisor Traveler", "review2-text": "\"Attention to detail, excellent logistics and the choice of locations exceeded our expectations. The guidance for perfect shots and the opportunity to experience Bulgaria's wildlife in its best light were the cherry on top. Great brand with a true heart!\"", "review2-loc": "TripAdvisor Traveler", "review3-text": "\"An incredible wildlife experience. The combination of birdwatching, local culture, and professional photography insights made this journey truly unique. Unmatched expertise and care.\"", "review3-loc": "TripAdvisor Traveler", "nl-sub": "Private Circle & Insights", "nl-title": "Receive Private Offers & Field Dispatches", "nl-desc": "Join our mailing list to receive early access to upcoming limited expeditions, seasonal nature reports, and curated portfolio highlights directly in your inbox.", "nl-placeholder": "Enter your email address...", "nl-btn": "Subscribe", "nl-success": "Thank you for joining our private circle.", "partners-title": "Trusted Partners & Field Equipment", "footer-desc": "Bespoke photography journeys across regional landscapes and global wilderness.", "footer-nav": "Navigation", "footer-contact": "Direct Contact", "footer-rights": "© 2026 AVISIA.tours. ALL RIGHTS RESERVED.", "pmodal-title": "Request a Private Journey", "pmodal-sub": "Tailored Photography & Nature Encounters", "pmodal-interests": "Primary Focus & Interests", "cb-birds": "Birdwatching", "cb-photo": "Fine-Art Photography", "cb-wildlife": "Wildlife & Flora", "cb-culture": "Heritage & Culture", "pmodal-time": "Preferred Season / Dates", "pmodal-duration": "Desired Duration", "pmodal-details": "Special Requests", "btn-send-private": "Send Private Inquiry", "pthanks-title": "Inquiry Received", "pthanks-desc": "We will review your request and get back to you within 24 hours.", "program-label": "Journey Overview", "booking-step-1": "1. Select Available Dates", "booking-step-2": "2. Traveler Information", "label-name": "Full Name", "label-email": "Email Address", "label-phone": "Phone / WhatsApp", "label-guests": "Number of Guests", "label-notes": "Special Requests", "btn-confirm-booking": "Confirm Booking Request", "booking-thanks-title": "Reservation Request Sent", "booking-thanks-desc": "We will contact you via email within 24 hours.", "btn-close": "Close Window"
+        "page-title": "AVISIA.tours — The world, seen differently", "tagline": "The world, seen differently", "nav-journeys": "Destinations", "nav-galleries": "Galleries", "nav-about": "About", "nav-stories": "Stories", "nav-contact": "Contact", "hero-title": "Guided by nature, defined by detail.", "hero-desc": "Small groups. Local expertise. Remarkable places. From regional sanctuaries to remote tropical wilderness, explored with patience and purpose.", "hero-btn": "Discover Destinations", "journeys-sub": "Curated Portfolio", "journeys-title": "Destinations", "tour1-meta": "Northern Greece • 4 Days", "tour1-title": "Lake Kerkini: The Golden Pelican Sanctuary", "tour1-desc": "Exclusive early-morning boat charters to shoot Dalmatian Pelicans.", "tour1-tag": "Birdwatching & Fine-Art", "tour2-meta": "Black Sea Coast • 5 Days", "tour2-title": "Burgas Wetlands & Coastal Migration", "tour2-desc": "Navigate saline lagoons during peak migration.", "tour2-tag": "Lagoons & Migration", "tour3-meta": "Rila Mountain Range • 6 Days", "tour3-title": "Rila Highlands & Alpine Fauna", "tour3-desc": "Alpine landscape and high-altitude wildlife photography.", "tour3-tag": "Alpine Landscapes", "tour4-meta": "Central America • 11 Days", "tour4-title": "Costa Rica: Canopy Light & Cloud Forests", "tour4-desc": "From Quetzals in cloud forests to hummingbird setups & rainforest canals.", "tour4-tag": "Tropical Biodiversity", "tour5-meta": "Indian Ocean • 12 Days", "tour5-title": "Sri Lanka: Ancient Realms & Wild Horizons", "tour5-desc": "Track leopards, elephants, and endemic birds in ancient ecosystems.", "tour5-tag": "Big Mammals & Rainforest", "book-now": "View Program & Book →", "galleries-sub": "Visual Portfolio", "galleries-title": "Curated Galleries", "filter-all": "All Galleries", "filter-avian": "Avian", "filter-wildlife": "Wildlife", "filter-portraits": "Portraits", "filter-urban": "Urban", "filter-landscapes": "Landscapes", "filter-heritage": "Heritage", "view-album": "Immersive View", "about-sub": "Our Ethos", "about-title": "Deep Unrushed Experiences.", "about-desc": "AVISIA was born from a desire to redefine photography travel in the Southern Balkans. We move away from rushed itineraries, favoring slow, deliberate exploration guided by natural light. By combining deep ecological knowledge with patient field craft, we offer intimate encounters with wild landscapes and rare species. Every journey is designed to foster a profound connection with nature, leaving time for authentic artistic expression.", "about-btn": "Request Private Journey", "creator-btn": "Meet Your Guide", "creator-modal-sub": "Founder & Field Guide", "creator-modal-title": "Behind the Lens: The Vision & The Guide", "stories-sub": "Editorial & Insights", "stories-title": "Field Stories", "read-story": "Read Story →", "reviews-sub": "Traveler Testimonials", "reviews-title": "TripAdvisor Reviews", "review1-text": "\"We had a fantastic day exploring remarkable nature spots near Sofia. Our guide possessed exceptional knowledge of birds and local ecology, making the whole trip not only fruitful for photography, but also extremely interesting. Highly recommended to any nature lover!\"", "review1-loc": "TripAdvisor Traveler", "review2-text": "\"Attention to detail, excellent logistics and the choice of locations exceeded our expectations. The guidance for perfect shots and the opportunity to experience Bulgaria's wildlife in its best light were the cherry on top. Great brand with a true heart!\"", "review2-loc": "TripAdvisor Traveler", "review3-text": "\"An incredible wildlife experience. The combination of birdwatching, local culture, and professional photography insights made this journey truly unique. Unmatched expertise and care.\"", "review3-loc": "TripAdvisor Traveler", "nl-sub": "Private Circle & Insights", "nl-title": "Receive Private Offers & Field Dispatches", "nl-desc": "Join our mailing list to receive early access to upcoming limited expeditions, seasonal nature reports, and curated portfolio highlights directly in your inbox.", "nl-placeholder": "Enter your email address...", "nl-btn": "Subscribe", "nl-success": "Thank you for joining our private circle.", "partners-title": "Trusted Partners & Field Equipment", "footer-desc": "Bespoke photography journeys across regional landscapes and global wilderness.", "footer-nav": "Navigation", "footer-contact": "Direct Contact", "footer-rights": "© 2026 AVISIA.tours. ALL RIGHTS RESERVED.", "pmodal-title": "Request a Private Journey", "pmodal-sub": "Tailored Photography & Nature Encounters", "pmodal-interests": "Primary Focus & Interests", "cb-birds": "Birdwatching", "cb-photo": "Fine-Art Photography", "cb-wildlife": "Wildlife & Flora", "cb-culture": "Heritage & Culture", "pmodal-time": "Preferred Season / Dates", "pmodal-duration": "Desired Duration", "pmodal-details": "Special Requests", "btn-send-private": "Send Private Inquiry", "pthanks-title": "Inquiry Received", "pthanks-desc": "We will review your request and get back to you within 24 hours.", "program-label": "Journey Overview", "booking-step-1": "1. Select Available Dates", "booking-step-2": "2. Traveler Information", "label-name": "Full Name", "label-email": "Email Address", "label-phone": "Phone / WhatsApp", "label-guests": "Number of Guests", "label-notes": "Special Requests", "btn-confirm-booking": "Confirm Booking Request", "booking-thanks-title": "Reservation Request Sent", "booking-thanks-desc": "We will contact you via email within 24 hours.", "btn-close": "Close Window"
       },
       bg: {
-        "page-title": "AVISIA.tours — Светът, видян различно", "tagline": "Светът, видян различно", "nav-journeys": "Дестинации", "nav-galleries": "Галерии", "nav-about": "За нас", "nav-stories": "Истории", "nav-contact": "Контакт", "hero-title": "Guided by nature, defined by detail.", "hero-desc": "Малки групи. Местни експерти. Забележителни места. От близки убежища до далечна тропическа дива природа, изследвани с търпение и цел.", "hero-btn": "Открийте дестинациите", "journeys-sub": "Селектирано портфолио", "journeys-title": "Дестинации", "tour1-meta": "Северна Гърция • 4 Дни", "tour1-title": "Езерото Керкини: Убежището на къдроглавия пеликан", "tour1-desc": "Ексклузивни лодки рано сутрин за фотографиране на пеликани.", "tour1-tag": "Птици & Изящно изкуство", "tour2-meta": "Черноморско крайбрежие • 5 Дни", "tour2-title": "Бургаските езера и крайбрежната миграция", "tour2-desc": "Плаване из солените лагуни по време на миграция.", "tour2-tag": "Лагуни & Миграция", "tour3-meta": "Рила Планина • 6 Дни", "tour3-title": "Алпийска Рила и висонинна фауна", "tour3-desc": "Алпийски пейзажи и фотографски преходи.", "tour3-tag": "Алпийски пейзажи", "tour4-meta": "Централна Америка • 11 Дни", "tour4-title": "Коста Рика: Сенките на тропическата гора", "tour4-desc": "От Кетцали в облачните гори до колибри и речни канали.", "tour4-tag": "Тропическо биоразнообразие", "tour5-meta": "Индийски океан • 12 Дни", "tour5-title": "Шри Ланка: Древни кралства и диви хоризонти", "tour5-desc": "Леопарди, слонове и ендемични птици в древни екосистеми.", "tour5-tag": "Големи бозайници & Джунгла", "book-now": "Програма & Записване →", "galleries-sub": "Визуално портфолио", "galleries-title": "Селектирани галерии", "filter-all": "Всички", "filter-avian": "Птици", "filter-wildlife": "Дива природа", "filter-portraits": "Портрети", "filter-urban": "Градска среда", "filter-landscapes": "Пейзажи", "filter-heritage": "Наследство", "view-album": "Виж галерията →", "about-sub": "Нашата философия", "about-title": "Дълбоки и непребързани преживявания.", "about-desc": "AVISIA бе създадена от желанието да предефинираме фотографските пътувания в Южните Балкани. Изоставяме забързаните маршрути в полза на бавното, целенасочено изследване, водено от естествената светлина. Чрез съчетаването на задълбочени екологични познания и търпелива работа на терен, ние предлагаме интимни срещи с дивата природа и редки видове. Всяко пътуване е проектирано така, че да създаде дълбока връзка с природата, оставяйки време за автентично артистично изразяване.", "about-btn": "Заяви индивидуално пътуване", "creator-btn": "За създателя и гида", "creator-modal-sub": "Основател & Полеви гид", "creator-modal-title": "Зад обектива: Визията и пътуването", "stories-sub": "Редакционни статии", "stories-title": "Истории от терена", "read-story": "Прочети историята →", "reviews-sub": "Отзиви от пътешественици", "reviews-title": "TripAdvisor Отзиви", "review1-text": "\"Прекарахме фантастичен ден в разглеждане на забележителни природни места близо до София. Нашият водач притежаваше изключителни познания за птиците и местната екология, което направи цялото пътуване не само ползотворно за фотографията, но и изключително любопитно. Препоръчвам с две ръце!\"", "review1-loc": "TripAdvisor Пътешественик", "review2-text": "\"Вниманието към детайла, отличната логистика и изборът на локации надминаха очакванията ни. Упътването за перфектните кадри и възможността да се докоснем до дивата природа на България в най-добрата ѝ светлина бяха черешката на тортата. Страхотен бранд с отношение!\"", "review2-loc": "TripAdvisor Пътешественик", "review3-text": "\"Невероятно преживяване сред дивата природа. Комбинацията от наблюдение на птици, местна култура и професионални фотографски съвети направи това пътуване наистина уникално.\"", "review3-loc": "TripAdvisor Пътешественик", "nl-sub": "Частен кръг & Полеви бележки", "nl-title": "Получавайте специални оферти и ексклузивни предложения", "nl-desc": "Абонирайте се за нашия бюлетин, за да получавате първи информация за предстоящи ограничени експедиции, сезонни природни доклади и селектирани акценти директно във вашата поща.", "nl-placeholder": "Въведете вашия имейл адрес...", "nl-btn": "Абониране", "nl-success": "Благодарим Ви, че стана част от нашия частен кръг.", "partners-title": "Официални партньори & Полево оборудване", "footer-desc": "Персонализирани фотографски пътешествия из регионални пейзажи и световна дива природа.", "footer-nav": "Навигация", "footer-contact": "Директен контакт", "footer-rights": "© 2026 AVISIA.tours. ВСИЧКИ ПРАВА СA ЗАПАЗЕНИ.", "pmodal-title": "Заяви индивидуално пътуване", "pmodal-sub": "Персонализирана фотография & срещи с природата", "pmodal-interests": "Основен фокус & интереси", "cb-birds": "Наблюдение на птици", "cb-photo": "Артистична фотография", "cb-wildlife": "Див живот & флора", "cb-culture": "Култура & традиции", "pmodal-time": "Предпочитан сезон / дати", "pmodal-duration": "Продължителност", "pmodal-details": "Специални изисквания", "btn-send-private": "Изпрати запитване", "pthanks-title": "Запитването е получено", "pthanks-desc": "Ще прегледаме желаните от Вас параметри и ще се свържем с Вас до 24 часа.", "program-label": "Преглед на пътуването", "booking-step-1": "1. Изберете дати", "booking-step-2": "2. Данни за записващия се", "label-name": "Две имена", "label-email": "Имейл адрес", "label-phone": "Телефон", "label-guests": "Брой пътуващи", "label-notes": "Специални изисквания", "btn-confirm-booking": "Потвърди заявката", "booking-thanks-title": "Заявката е изпратена", "booking-thanks-desc": "Ще се свържем с Вас по имейл до 24 часа.", "btn-close": "Затвори прозореца"
+        "page-title": "AVISIA.tours — Светът, видян различно", "tagline": "Светът, видян различно", "nav-journeys": "Дестинации", "nav-galleries": "Галерии", "nav-about": "За нас", "nav-stories": "Истории", "nav-contact": "Контакт", "hero-title": "Guided by nature, defined by detail.", "hero-desc": "Малки групи. Местни експерти. Забележителни места. От близки убежища до далечна тропическа дива природа, изследвани с търпение и цел.", "hero-btn": "Открийте дестинациите", "journeys-sub": "Селектирано портфолио", "journeys-title": "Дестинации", "tour1-meta": "Северна Гърция • 4 Дни", "tour1-title": "Езерото Керкини: Убежището на къдроглавия пеликан", "tour1-desc": "Ексклузивни лодки рано сутрин за фотографиране на пеликани.", "tour1-tag": "Птици & Изящно изкуство", "tour2-meta": "Черноморско крайбрежие • 5 Дни", "tour2-title": "Бургаските езера и крайбрежната миграция", "tour2-desc": "Плаване из солените лагуни по време на миграция.", "tour2-tag": "Лагуни & Миграция", "tour3-meta": "Рила Планина • 6 Дни", "tour3-title": "Алпийска Рила и висонинна фауна", "tour3-desc": "Алпийски пейзажи и фотографски преходи.", "tour3-tag": "Алпийски пейзажи", "tour4-meta": "Централна Америка • 11 Дни", "tour4-title": "Коста Рика: Сенките на тропическата гора", "tour4-desc": "От Кетцали в облачните гори до колибри и речни канали.", "tour4-tag": "Тропическо биоразнообразие", "tour5-meta": "Индийски океан • 12 Дни", "tour5-title": "Шри Ланка: Древни кралства и диви хоризонти", "tour5-desc": "Леопарди, слонове и ендемични птици в древни екосистеми.", "tour5-tag": "Големи бозайници & Джунгла", "book-now": "Програма & Записване →", "galleries-sub": "Визуално портфолио", "galleries-title": "Селектирани галерии", "filter-all": "Всички", "filter-avian": "Птици", "filter-wildlife": "Дива природа", "filter-portraits": "Портрети", "filter-urban": "Градска среда", "filter-landscapes": "Пейзажи", "filter-heritage": "Наследство", "view-album": "Имерсивен изглед", "about-sub": "Нашата философия", "about-title": "Дълбоки и непребързани преживявания.", "about-desc": "AVISIA бе създадена от желанието да предефинираме фотографските пътувания в Южните Балкани. Изоставяме забързаните маршрути в полза на бавното, целенасочено изследване, водено от естествената светлина. Чрез съчетаването на задълбочени екологични познания и търпелива работа на терен, ние предлагаме интимни срещи с дивата природа и редки видове. Всяко пътуване е проектирано така, че да създаде дълбока връзка с природата, оставяйки време за автентично артистично изразяване.", "about-btn": "Заяви индивидуално пътуване", "creator-btn": "За създателя и гида", "creator-modal-sub": "Основател & Полеви гид", "creator-modal-title": "Зад обектива: Визията и пътуването", "stories-sub": "Редакционни статии", "stories-title": "Истории от терена", "read-story": "Прочети историята →", "reviews-sub": "Отзиви от пътешественици", "reviews-title": "TripAdvisor Отзиви", "review1-text": "\"Прекарахме фантастичен ден в разглеждане на забележителни природни места близо до София. Нашият водач притежаваше изключителни познания за птиците и местната екология, което направи цялото пътуване не само ползотворно за фотографията, но и изключително любопитно. Препоръчвам с две ръце!\"", "review1-loc": "TripAdvisor Пътешественик", "review2-text": "\"Вниманието към детайла, отличната логистика и изборът на локации надминаха очакванията ни. Упътването за перфектните кадри и възможността да се докоснем до дивата природа на България в най-добрата ѝ светлина бяха черешката на тортата. Страхотен бранд с отношение!\"", "review2-loc": "TripAdvisor Пътешественик", "review3-text": "\"Невероятно преживяване сред дивата природа. Комбинацията от наблюдение на птици, местна култура и професионални фотографски съвети направи това пътуване наистина уникално.\"", "review3-loc": "TripAdvisor Пътешественик", "nl-sub": "Частен кръг & Полеви бележки", "nl-title": "Получавайте специални оферти и ексклузивни предложения", "nl-desc": "Абонирайте се за нашия бюлетин, за да получавате първи информация за предстоящи ограничени експедиции, сезонни природни доклади и селектирани акценти директно във вашата поща.", "nl-placeholder": "Въведете вашия имейл адрес...", "nl-btn": "Абониране", "nl-success": "Благодарим Ви, че стана част от нашия частен кръг.", "partners-title": "Официални партньори & Полево оборудване", "footer-desc": "Персонализирани фотографски пътешествия из регионални пейзажи и световна дива природа.", "footer-nav": "Навигация", "footer-contact": "Директен контакт", "footer-rights": "© 2026 AVISIA.tours. ВСИЧКИ ПРАВА СA ЗАПАЗЕНИ.", "pmodal-title": "Заяви индивидуално пътуване", "pmodal-sub": "Персонализирана фотография & срещи с природата", "pmodal-interests": "Основен фокус & интереси", "cb-birds": "Наблюдение на птици", "cb-photo": "Артистична фотография", "cb-wildlife": "Див живот & флора", "cb-culture": "Култура & традиции", "pmodal-time": "Предпочитан сезон / дати", "pmodal-duration": "Продължителност", "pmodal-details": "Специални изисквания", "btn-send-private": "Изпрати запитване", "pthanks-title": "Запитването е получено", "pthanks-desc": "Ще прегледаме желаните от Вас параметри и ще се свържем с Вас до 24 часа.", "program-label": "Преглед на пътуването", "booking-step-1": "1. Изберете дати", "booking-step-2": "2. Данни за записващия се", "label-name": "Две имена", "label-email": "Имейл адрес", "label-phone": "Телефон", "label-guests": "Брой пътуващи", "label-notes": "Специални изисквания", "btn-confirm-booking": "Потвърди заявката", "booking-thanks-title": "Заявката е изпратена", "booking-thanks-desc": "Ще се свържем с Вас по имейл до 24 часа.", "btn-close": "Затвори прозореца"
       }
     };
 
@@ -1322,4 +1374,3 @@
   </script>
 </body>
 </html>
-```[cite: 5]
