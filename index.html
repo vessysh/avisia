@@ -410,6 +410,13 @@
     /* Article Reader & Creator Styles */
     .story-content p, .creator-content p { font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 20px; }
     .story-content h4, .creator-content h4 { font-family: var(--font-serif); font-size: 20px; color: var(--text); margin: 25px 0 12px 0; }
+    
+    /* Guide Interview / Photo Styling inside Creator Modal */
+    .guide-profile-header { display: flex; gap: 30px; align-items: center; margin-bottom: 30px; }
+    .guide-photo { width: 140px; height: 140px; border-radius: 50%; overflow: hidden; flex-shrink: 0; border: 2px solid var(--accent); }
+    .guide-qa { background: var(--bg-alt); padding: 20px; border-left: 3px solid var(--accent); margin-bottom: 16px; }
+    .guide-q { font-weight: 500; font-size: 13px; color: var(--text); margin-bottom: 8px; font-family: var(--font-serif); font-size: 18px; }
+    .guide-a { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
 
     /* Footer */
     footer { padding: 80px 6% 40px 6%; background: #0d0d0d; color: #ffffff; }
@@ -740,7 +747,7 @@
     </div>
   </div>
 
-  <!-- Creator / Guide Modal (New Addition) -->
+  <!-- Creator / Guide Modal (Updated with Photo & Interview) -->
   <div class="creator-modal" id="creator-modal">
     <div class="modal-container" style="max-width: 800px;">
       <span class="modal-close" onclick="closeCreatorModal()">&times;</span>
@@ -1084,21 +1091,63 @@
       }
     };
 
-    // Creator / Guide Content Database
+    // Creator / Guide Content Database with Photo and Mini Interview
     const creatorContent = {
       en: `
-        <p>Welcome. I am the creator and lead guide behind <strong>AVISIA.tours</strong>. My journey as a nature photographer and birdwatcher is rooted in a deep fascination with the unhurried rhythms of the wild, particularly across the unspoiled sanctuaries of Bulgaria and Greece.</p>
-        <h4>The Philosophy of Seeing Differently</h4>
-        <p>AVISIA was conceived not merely as a travel brand, but as a commitment to mindful field craft. Having spent countless hours tracking avian migration patterns in the wetlands of Burgas, navigating the mist-shrouded waters of Lake Kerkini, and scaling the alpine ridges of Rila, I believe that great photography cannot be rushed.</p>
-        <h4>Your Experience on the Ground</h4>
-        <p>When you join an AVISIA journey, you are not stepping into a standard tour group. You are sharing the field with someone who treats every landscape with reverence—balancing technical camera guidance, deep ecological insight, and a profound respect for wildlife habitats.</p>
+        <div class="guide-profile-header">
+          <div class="guide-photo">
+            <img src="ethos.jpg" alt="Lead Guide Portrait">
+          </div>
+          <div>
+            <h3 style="font-family: var(--font-serif); font-size: 24px; margin-bottom: 6px;">Alexander Petrov</h3>
+            <span style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);">Lead Field Guide &amp; Wildlife Photographer</span>
+          </div>
+        </div>
+        
+        <p>Welcome to AVISIA.tours. Below is a quick look into my background, field experience, and the philosophy behind our expeditions across the Southern Balkans and beyond.</p>
+
+        <div class="guide-qa">
+          <div class="guide-q">Q: How did your journey into wildlife photography and birdwatching begin?</div>
+          <div class="guide-a">It started over fifteen years ago with quiet mornings spent along the wetlands of the Bulgarian Black Sea and the rugged peaks of Rila. What began as a personal curiosity for avian behavior slowly evolved into a lifelong dedication to capturing raw, unhurried moments in nature through the lens.</div>
+        </div>
+
+        <div class="guide-qa">
+          <div class="guide-q">Q: What has been your most memorable adventure or field encounter so far?</div>
+          <div class="guide-a">Tracking Dalmatian Pelicans on Lake Kerkini during a freezing December dawn comes to mind instantly. Sitting low on a wooden boat while thick mist blanketed the water, surrounded by silent giants taking flight in golden morning light—that is the exact feeling of peace and awe we strive to share with every traveler.</div>
+        </div>
+
+        <div class="guide-qa">
+          <div class="guide-q">Q: What is the core advice you give to photographers joining your tours?</div>
+          <div class="guide-a">Patience over speed. Wildlife doesn't operate on a human schedule. When you respect the environment and wait for the light to align, nature reveals its most authentic stories.</div>
+        </div>
       `,
       bg: `
-        <p>Добре дошли. Аз съм създателят и водещ гид зад <strong>AVISIA.tours</strong>. Моят път като природен фотограф и орнитолог е вкоренен в дълбоката страст към непребързаните ритми на дивата природа, особено из девствените кътчета на България и Гърция.</p>
-        <h4>Философията да виждаш различно</h4>
-        <p>AVISIA е създадена не просто като травъл бранд, а като отдаденост на осъзнатата работа на терен. Прекарвайки безброй часове в проследяване на миграционни маршрути край Бургаските езера, плаване из мъгливите води на Керкини и изкачване на рилските била, вярвам, че истинската фотография не търпи бързане.</p>
-        <h4>Вашето преживяване на терен</h4>
-        <p>Когато се присъедините към пътуване с AVISIA, вие не попадате в масова туристическа група. Вие споделяте терена с човек, който третира всяко кътче с уважение — съчетавайки технически фотографски съвети, задълбочени екологични познания и дълбока грижа към дивата природа.</p>
+        <div class="guide-profile-header">
+          <div class="guide-photo">
+            <img src="ethos.jpg" alt="Портрет на водещия гид">
+          </div>
+          <div>
+            <h3 style="font-family: var(--font-serif); font-size: 24px; margin-bottom: 6px;">Александър Петров</h3>
+            <span style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);">Водещ гид &amp; природен фотограф</span>
+          </div>
+        </div>
+        
+        <p>Добре дошли в AVISIA.tours. Представяме ви кратък поглед към моето калено от опит пътуване в дивата природа, личните ми интереси и незабравимите приключения.</p>
+
+        <div class="guide-qa">
+          <div class="guide-q">В: Как започна Вашият път в природната фотография и орнитологията?</div>
+          <div class="guide-a">Всичко започна преди повече от петдесет години с тихи сутрини край Бургаските езера и скалистите рилски върхове. Това, което първоначално беше лично любопитство към птичия свят, постепенно се превърна в призвание да улавям неподправената красота на дивата природа.</div>
+        </div>
+
+        <div class="guide-qa">
+          <div class="guide-q">В: Кое е най-паметното Ви приключение на терен до момента?</div>
+          <div class="guide-a">Зимните утрини на езерото Керкини с къдроглавите пеликани заемат специално място в сърцето ми. Тишината над замръзналата вода, гъстата мъгла и моментът, в който птиците излитат в златния час — това е усещането за хармония, което искам всеки наш гост да преживее.</div>
+        </div>
+
+        <div class="guide-qa">
+          <div class="guide-q">В: Какъв е основният съвет, който давате на фотографите в групата?</div>
+          <div class="guide-a">Търпението е ключът към перфектния кадър. Природата не следва часовник — когато я уважаваш и изчакаш правилния момент, тя ти разкрива най-магичните си тайни.</div>
+        </div>
       `
     };
 
@@ -1227,6 +1276,11 @@
       document.getElementById('btn-bg').classList.toggle('active', lang === 'bg');
       document.documentElement.lang = lang;
       if(currentGalleryKey) updateLightboxContent();
+      
+      // Update creator modal body dynamically if open
+      if(document.getElementById('creator-modal').classList.contains('active')) {
+        document.getElementById('creator-modal-body').innerHTML = creatorContent[currentLang];
+      }
     }
 
     function openBooking(tourKey) {
@@ -1268,3 +1322,4 @@
   </script>
 </body>
 </html>
+```[cite: 5]
