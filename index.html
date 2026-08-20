@@ -153,6 +153,41 @@
     .story-card h3 { font-family: var(--font-serif); font-size: 24px; font-weight: 400; margin-bottom: 12px; line-height: 1.3; }
     .story-card p { font-size: 13px; color: var(--text-muted); line-height: 1.7; margin-bottom: 16px; }
 
+    /* FAQ Section Styles */
+    .faq-container { max-width: 900px; margin: 0 auto; }
+    .faq-item { border-bottom: 1px solid var(--border); padding: 24px 0; }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-question {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: color 0.3s ease;
+    }
+    .faq-question:hover { color: var(--accent); }
+    .faq-icon {
+      font-size: 18px;
+      color: var(--accent);
+      transition: transform 0.3s ease;
+    }
+    .faq-item.active .faq-icon { transform: rotate(45deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), margin-top 0.3s ease;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+    .faq-item.active .faq-answer {
+      max-height: 300px;
+      margin-top: 16px;
+    }
+
     /* TripAdvisor Section */
     .reviews-section {
       background-color: var(--bg-alt);
@@ -508,6 +543,7 @@
         <li><a href="#galleries" data-i18n="nav-galleries">Galleries</a></li>
         <li><a href="#about" data-i18n="nav-about">About</a></li>
         <li><a href="#stories" data-i18n="nav-stories">Stories</a></li>
+        <li><a href="#faq" data-i18n="nav-faq">FAQ</a></li>
         <li><a href="#contact" data-i18n="nav-contact">Contact</a></li>
       </ul>
 
@@ -715,6 +751,67 @@
         <p data-i18n="story2-desc">A closer look at local conservation efforts protecting the endangered Dalmatian Pelican population.</p>
         <a href="javascript:void(0)" onclick="openStory('story2')" style="font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent);" data-i18n="read-story">Read Story →</a>
       </article>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="section" id="faq">
+    <div class="section-header" style="text-align: center; display: block; margin-bottom: 60px;">
+      <span class="section-subtitle" data-i18n="faq-sub">Helpful Information</span>
+      <h2 class="section-title" data-i18n="faq-title">Frequently Asked Questions</h2>
+      <p style="font-size: 13px; color: var(--text-muted); max-width: 600px; margin: 12px auto 0 auto;" data-i18n="faq-desc">Everything you need to know about our photo expeditions, gear recommendations, and logistics.</p>
+    </div>
+
+    <div class="faq-container">
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span data-i18n="faq-q1">What camera equipment should I bring on an expedition?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer" data-i18n="faq-a1">
+          We recommend a camera body with good low-light performance, a telephoto lens (at least 300mm–600mm) for birding and wildlife, and a wider lens (24–70mm) for landscapes. Don't forget a sturdy tripod, extra memory cards, and spare batteries.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span data-i18n="faq-q2">How large are the photo tour groups?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer" data-i18n="faq-a2">
+          To ensure an intimate experience and individual guidance, our group sizes are kept small, typically capped at 4 to 6 participants per leader.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span data-i18n="faq-q3">Do I need to be a professional photographer to join?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer" data-i18n="faq-a3">
+          Not at all! Our journeys welcome non-photographers, passionate beginners, and seasoned professionals alike. Our guides provide tailored tuition according to your skill level.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span data-i18n="faq-q4">What is the physical difficulty level of the itineraries?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer" data-i18n="faq-a4">
+          Most tours involve light to moderate walking on uneven terrain. Alpine or cloud forest expeditions may require longer hikes, but we maintain an unhurried pace designed for optimal photography.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          <span data-i18n="faq-q5">How do private, customized journeys work?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer" data-i18n="faq-a5">
+          You can request a bespoke itinerary tailored strictly to your schedule, desired species targets, pace, and preferred level of accommodation through our Private Journey inquiry form.
+        </div>
+      </div>
     </div>
   </section>
 
@@ -944,6 +1041,7 @@
             <li><a href="#galleries" style="color: #888;" data-i18n="nav-galleries">Galleries</a></li>
             <li><a href="#about" style="color: #888;" data-i18n="nav-about">About Us</a></li>
             <li><a href="#stories" style="color: #888;" data-i18n="nav-stories">Stories</a></li>
+            <li><a href="#faq" style="color: #888;" data-i18n="nav-faq">FAQ</a></li>
           </ul>
         </div>
         <div>
@@ -962,6 +1060,20 @@
 
   <script>
     let currentLang = 'en';
+
+    // Toggle FAQ Function
+    function toggleFaq(element) {
+      const parent = element.parentElement;
+      const isActive = parent.classList.contains('active');
+      
+      document.querySelectorAll('.faq-item').forEach(item => {
+        item.classList.remove('active');
+      });
+
+      if (!isActive) {
+        parent.classList.add('active');
+      }
+    }
 
     // Tour Data Database for Modal Programs
     const tourDetails = {
@@ -1305,10 +1417,10 @@
 
     const translations = {
       en: {
-        "page-title": "AVISIA.tours — The world, seen differently", "tagline": "The world, seen differently", "nav-journeys": "Destinations", "nav-galleries": "Galleries", "nav-about": "About", "nav-stories": "Stories", "nav-contact": "Contact", "hero-title": "Guided by nature, defined by detail.", "hero-desc": "Small groups. Local expertise. Remarkable places. From regional sanctuaries to remote tropical wilderness, explored with patience and purpose.", "hero-btn": "Discover Destinations", "journeys-sub": "Curated Portfolio", "journeys-title": "Destinations", "tour1-meta": "Northern Greece • 4 Days", "tour1-title": "Lake Kerkini: The Golden Pelican Sanctuary", "tour1-desc": "Exclusive early-morning boat charters to shoot Dalmatian Pelicans.", "tour1-tag": "Birdwatching & Fine-Art", "tour2-meta": "Black Sea Coast • 5 Days", "tour2-title": "Burgas Wetlands & Coastal Migration", "tour2-desc": "Navigate saline lagoons during peak migration.", "tour2-tag": "Lagoons & Migration", "tour3-meta": "Rila Mountain Range • 6 Days", "tour3-title": "Rila Highlands & Alpine Fauna", "tour3-desc": "Alpine landscape and high-altitude wildlife photography.", "tour3-tag": "Alpine Landscapes", "tour4-meta": "Central America • 11 Days", "tour4-title": "Costa Rica: Canopy Light & Cloud Forests", "tour4-desc": "From Quetzals in cloud forests to hummingbird setups & rainforest canals.", "tour4-tag": "Tropical Biodiversity", "tour5-meta": "Indian Ocean • 12 Days", "tour5-title": "Sri Lanka: Ancient Realms & Wild Horizons", "tour5-desc": "Track leopards, elephants, and endemic birds in ancient ecosystems.", "tour5-tag": "Big Mammals & Rainforest", "book-now": "View Program & Book →", "galleries-sub": "Visual Portfolio", "galleries-title": "Curated Galleries", "filter-all": "All Galleries", "filter-avian": "Avian", "filter-wildlife": "Wildlife", "filter-portraits": "Portraits", "filter-urban": "Urban", "filter-landscapes": "Landscapes", "filter-heritage": "Heritage", "view-album": "Immersive View", "about-sub": "Our Ethos", "about-title": "Deep Unrushed Experiences.", "about-desc": "AVISIA was born from a desire to redefine photography travel in the Southern Balkans. We move away from rushed itineraries, favoring slow, deliberate exploration guided by natural light. By combining deep ecological knowledge with patient field craft, we offer intimate encounters with wild landscapes and rare species. Every journey is designed to foster a profound connection with nature, leaving time for authentic artistic expression.", "about-btn": "Request Private Journey", "creator-btn": "Meet Your Guide", "creator-modal-sub": "Founder & Field Guide", "creator-modal-title": "Behind the Lens: The Vision & The Guide", "stories-sub": "Editorial & Insights", "stories-title": "Field Stories", "read-story": "Read Story →", "reviews-sub": "Traveler Testimonials", "reviews-title": "TripAdvisor Reviews", "review1-text": "\"We had a fantastic day exploring remarkable nature spots near Sofia. Our guide possessed exceptional knowledge of birds and local ecology, making the whole trip not only fruitful for photography, but also extremely interesting. Highly recommended to any nature lover!\"", "review1-loc": "TripAdvisor Traveler", "review2-text": "\"Attention to detail, excellent logistics and the choice of locations exceeded our expectations. The guidance for perfect shots and the opportunity to experience Bulgaria's wildlife in its best light were the cherry on top. Great brand with a true heart!\"", "review2-loc": "TripAdvisor Traveler", "review3-text": "\"An incredible wildlife experience. The combination of birdwatching, local culture, and professional photography insights made this journey truly unique. Unmatched expertise and care.\"", "review3-loc": "TripAdvisor Traveler", "nl-sub": "Private Circle & Insights", "nl-title": "Receive Private Offers & Field Dispatches", "nl-desc": "Join our mailing list to receive early access to upcoming limited expeditions, seasonal nature reports, and curated portfolio highlights directly in your inbox.", "nl-placeholder": "Enter your email address...", "nl-btn": "Subscribe", "nl-success": "Thank you for joining our private circle.", "partners-title": "Trusted Partners & Field Equipment", "footer-desc": "Bespoke photography journeys across regional landscapes and global wilderness.", "footer-nav": "Navigation", "footer-contact": "Direct Contact", "footer-rights": "© 2026 AVISIA.tours. ALL RIGHTS RESERVED.", "pmodal-title": "Request a Private Journey", "pmodal-sub": "Tailored Photography & Nature Encounters", "pmodal-interests": "Primary Focus & Interests", "cb-birds": "Birdwatching", "cb-photo": "Fine-Art Photography", "cb-wildlife": "Wildlife & Flora", "cb-culture": "Heritage & Culture", "pmodal-time": "Preferred Season / Dates", "pmodal-duration": "Desired Duration", "pmodal-details": "Special Requests", "btn-send-private": "Send Private Inquiry", "pthanks-title": "Inquiry Received", "pthanks-desc": "We will review your request and get back to you within 24 hours.", "program-label": "Journey Overview", "booking-step-1": "1. Select Available Dates", "booking-step-2": "2. Traveler Information", "label-name": "Full Name", "label-email": "Email Address", "label-phone": "Phone / WhatsApp", "label-guests": "Number of Guests", "label-notes": "Special Requests", "btn-confirm-booking": "Confirm Booking Request", "booking-thanks-title": "Reservation Request Sent", "booking-thanks-desc": "We will contact you via email within 24 hours.", "btn-close": "Close Window"
+        "page-title": "AVISIA.tours — The world, seen differently", "tagline": "The world, seen differently", "nav-journeys": "Destinations", "nav-galleries": "Galleries", "nav-about": "About", "nav-stories": "Stories", "nav-faq": "FAQ", "nav-contact": "Contact", "hero-title": "Guided by nature, defined by detail.", "hero-desc": "Small groups. Local expertise. Remarkable places. From regional sanctuaries to remote tropical wilderness, explored with patience and purpose.", "hero-btn": "Discover Destinations", "journeys-sub": "Curated Portfolio", "journeys-title": "Destinations", "tour1-meta": "Northern Greece • 4 Days", "tour1-title": "Lake Kerkini: The Golden Pelican Sanctuary", "tour1-desc": "Exclusive early-morning boat charters to shoot Dalmatian Pelicans.", "tour1-tag": "Birdwatching & Fine-Art", "tour2-meta": "Black Sea Coast • 5 Days", "tour2-title": "Burgas Wetlands & Coastal Migration", "tour2-desc": "Navigate saline lagoons during peak migration.", "tour2-tag": "Lagoons & Migration", "tour3-meta": "Rila Mountain Range • 6 Days", "tour3-title": "Rila Highlands & Alpine Fauna", "tour3-desc": "Alpine landscape and high-altitude wildlife photography.", "tour3-tag": "Alpine Landscapes", "tour4-meta": "Central America • 11 Days", "tour4-title": "Costa Rica: Canopy Light & Cloud Forests", "tour4-desc": "From Quetzals in cloud forests to hummingbird setups & rainforest canals.", "tour4-tag": "Tropical Biodiversity", "tour5-meta": "Indian Ocean • 12 Days", "tour5-title": "Sri Lanka: Ancient Realms & Wild Horizons", "tour5-desc": "Track leopards, elephants, and endemic birds in ancient ecosystems.", "tour5-tag": "Big Mammals & Rainforest", "book-now": "View Program & Book →", "galleries-sub": "Visual Portfolio", "galleries-title": "Curated Galleries", "filter-all": "All Galleries", "filter-avian": "Avian", "filter-wildlife": "Wildlife", "filter-portraits": "Portraits", "filter-urban": "Urban", "filter-landscapes": "Landscapes", "filter-heritage": "Heritage", "view-album": "Immersive View", "about-sub": "Our Ethos", "about-title": "Deep Unrushed Experiences.", "about-desc": "AVISIA was born from a desire to redefine photography travel in the Southern Balkans. We move away from rushed itineraries, favoring slow, deliberate exploration guided by natural light. By combining deep ecological knowledge with patient field craft, we offer intimate encounters with wild landscapes and rare species. Every journey is designed to foster a profound connection with nature, leaving time for authentic artistic expression.", "about-btn": "Request Private Journey", "creator-btn": "Meet Your Guide", "creator-modal-sub": "Founder & Field Guide", "creator-modal-title": "Behind the Lens: The Vision & The Guide", "stories-sub": "Editorial & Insights", "stories-title": "Field Stories", "read-story": "Read Story →", "faq-sub": "Helpful Information", "faq-title": "Frequently Asked Questions", "faq-desc": "Everything you need to know about our photo expeditions, gear recommendations, and logistics.", "faq-q1": "What camera equipment should I bring on an expedition?", "faq-a1": "We recommend a camera body with good low-light performance, a telephoto lens (at least 300mm–600mm) for birding and wildlife, and a wider lens (24–70mm) for landscapes. Don't forget a sturdy tripod, extra memory cards, and spare batteries.", "faq-q2": "How large are the photo tour groups?", "faq-a2": "To ensure an intimate experience and individual guidance, our group sizes are kept small, typically capped at 4 to 6 participants per leader.", "faq-q3": "Do I need to be a professional photographer to join?", "faq-a3": "Not at all! Our journeys welcome non-photographers, passionate beginners, and seasoned professionals alike. Our guides provide tailored tuition according to your skill level.", "faq-q4": "What is the physical difficulty level of the itineraries?", "faq-a4": "Most tours involve light to moderate walking on uneven terrain. Alpine or cloud forest expeditions may require longer hikes, but we maintain an unhurried pace designed for optimal photography.", "faq-q5": "How do private, customized journeys work?", "faq-a5": "You can request a bespoke itinerary tailored strictly to your schedule, desired species targets, pace, and preferred level of accommodation through our Private Journey inquiry form.", "reviews-sub": "Traveler Testimonials", "reviews-title": "TripAdvisor Reviews", "review1-text": "\"We had a fantastic day exploring remarkable nature spots near Sofia. Our guide possessed exceptional knowledge of birds and local ecology, making the whole trip not only fruitful for photography, but also extremely interesting. Highly recommended to any nature lover!\"", "review1-loc": "TripAdvisor Traveler", "review2-text": "\"Attention to detail, excellent logistics and the choice of locations exceeded our expectations. The guidance for perfect shots and the opportunity to experience Bulgaria's wildlife in its best light were the cherry on top. Great brand with a true heart!\"", "review2-loc": "TripAdvisor Traveler", "review3-text": "\"An incredible wildlife experience. The combination of birdwatching, local culture, and professional photography insights made this journey truly unique. Unmatched expertise and care.\"", "review3-loc": "TripAdvisor Traveler", "nl-sub": "Private Circle & Insights", "nl-title": "Receive Private Offers & Field Dispatches", "nl-desc": "Join our mailing list to receive early access to upcoming limited expeditions, seasonal nature reports, and curated portfolio highlights directly in your inbox.", "nl-placeholder": "Enter your email address...", "nl-btn": "Subscribe", "nl-success": "Thank you for joining our private circle.", "partners-title": "Trusted Partners & Field Equipment", "footer-desc": "Bespoke photography journeys across regional landscapes and global wilderness.", "footer-nav": "Navigation", "footer-contact": "Direct Contact", "footer-rights": "© 2026 AVISIA.tours. ALL RIGHTS RESERVED.", "pmodal-title": "Request a Private Journey", "pmodal-sub": "Tailored Photography & Nature Encounters", "pmodal-interests": "Primary Focus & Interests", "cb-birds": "Birdwatching", "cb-photo": "Fine-Art Photography", "cb-wildlife": "Wildlife & Flora", "cb-culture": "Heritage & Culture", "pmodal-time": "Preferred Season / Dates", "pmodal-duration": "Desired Duration", "pmodal-details": "Special Requests", "btn-send-private": "Send Private Inquiry", "pthanks-title": "Inquiry Received", "pthanks-desc": "We will review your request and get back to you within 24 hours.", "program-label": "Journey Overview", "booking-step-1": "1. Select Available Dates", "booking-step-2": "2. Traveler Information", "label-name": "Full Name", "label-email": "Email Address", "label-phone": "Phone / WhatsApp", "label-guests": "Number of Guests", "label-notes": "Special Requests", "btn-confirm-booking": "Confirm Booking Request", "booking-thanks-title": "Reservation Request Sent", "booking-thanks-desc": "We will contact you via email within 24 hours.", "btn-close": "Close Window"
       },
       bg: {
-        "page-title": "AVISIA.tours — Светът, видян различно", "tagline": "Светът, видян различно", "nav-journeys": "Дестинации", "nav-galleries": "Галерии", "nav-about": "За нас", "nav-stories": "Истории", "nav-contact": "Контакт", "hero-title": "Guided by nature, defined by detail.", "hero-desc": "Малки групи. Местни експерти. Забележителни места. От близки убежища до далечна тропическа дива природа, изследвани с търпение и цел.", "hero-btn": "Открийте дестинациите", "journeys-sub": "Селектирано портфолио", "journeys-title": "Дестинации", "tour1-meta": "Северна Гърция • 4 Дни", "tour1-title": "Езерото Керкини: Убежището на къдроглавия пеликан", "tour1-desc": "Ексклузивни лодки рано сутрин за фотографиране на пеликани.", "tour1-tag": "Птици & Изящно изкуство", "tour2-meta": "Черноморско крайбрежие • 5 Дни", "tour2-title": "Бургаските езера и крайбрежната миграция", "tour2-desc": "Плаване из солените лагуни по време на миграция.", "tour2-tag": "Лагуни & Миграция", "tour3-meta": "Рила Планина • 6 Дни", "tour3-title": "Алпийска Рила и висонинна фауна", "tour3-desc": "Алпийски пейзажи и фотографски преходи.", "tour3-tag": "Алпийски пейзажи", "tour4-meta": "Централна Америка • 11 Дни", "tour4-title": "Коста Рика: Сенките на тропическата гора", "tour4-desc": "От Кетцали в облачните гори до колибри и речни канали.", "tour4-tag": "Тропическо биоразнообразие", "tour5-meta": "Индийски океан • 12 Дни", "tour5-title": "Шри Ланка: Древни кралства и диви хоризонти", "tour5-desc": "Леопарди, слонове и ендемични птици в древни екосистеми.", "tour5-tag": "Големи бозайници & Джунгла", "book-now": "Програма & Записване →", "galleries-sub": "Визуално портфолио", "galleries-title": "Селектирани галерии", "filter-all": "Всички", "filter-avian": "Птици", "filter-wildlife": "Дива природа", "filter-portraits": "Портрети", "filter-urban": "Градска среда", "filter-landscapes": "Пейзажи", "filter-heritage": "Наследство", "view-album": "Имерсивен изглед", "about-sub": "Нашата философия", "about-title": "Дълбоки и непребързани преживявания.", "about-desc": "AVISIA е родена от желанието да предефинираме фотографските пътувания на Балканите. Отдалечаваме се от препускащите маршрути в полза на бавното и целенасочено изследване, водено от естествената светлина. Комбинирайки дълбоки екологични познания с търпение на терен, предлагаме интимни срещи с диви пейзажи и редки видове. Всяко пътуване е проектирано да насърчи дълбока връзка с природата, оставяйки време за автентично художествено изразяване.", "about-btn": "Заявете частно пътуване", "creator-btn": "Запознайте се с гида", "creator-modal-sub": "Основател & Водещ гид", "creator-modal-title": "Зад обектива: Визията и гидът", "stories-sub": "Редакционни & Пътни бележки", "stories-title": "Истории от терен", "read-story": "Прочетете историята →", "reviews-sub": "Отзиви от пътешественици", "reviews-title": "Отзиви в TripAdvisor", "review1-text": "\"Имахме фантастичен ден в изследване на забележителни природни места край София. Нашият гид притежаваше изключителни познания за птиците и местната екология, което направи пътуването не само плодотворно за фотографията, но и изключително интересно.\"", "review1-loc": "TripAdvisor Пътешественик", "review2-text": "\"Внимание към детайла, отлична логистика и подборът на локации надхвърлиха очакванията ни. Насоките за перфектни кадри и възможността да се преживее дивата природа на България в най-добрата ѝ светлина бяха черешката на тортата.\"", "review2-loc": "TripAdvisor Пътешественик", "review3-text": "\"Невероятно изживяване сред дивата природа. Комбинацията от наблюдение на птици, местна култура и професионални фотографски прозрения направи това пътуване уникално.\"", "review3-loc": "TripAdvisor Пътешественик", "nl-sub": "Частен кръг & Пътни бележки", "nl-title": "Получавайте частни оферти и доклади от терен", "nl-desc": "Присъединете се към нашия бюлетин, за да получавате ранен достъп до бъдещи лимитирани експедиции, сезонни отчети и акценти от портфолиото директно във вашата поща.", "nl-placeholder": "Въведете вашия имейл...", "nl-btn": "Абонирайте се", "nl-success": "Благодарим ви, че се присъединихте към нашия частен кръг.", "partners-title": "Доверени партньори & Екипировка", "footer-desc": "Индивидуални фотографски пътувания из регионални пейзажи и световна дива природа.", "footer-nav": "Навигация", "footer-contact": "Директен контакт", "footer-rights": "© 2026 AVISIA.tours. ВСИЧКИ ПРАВА ЗАПАЗЕНИ.", "pmodal-title": "Заявете частно пътуване", "pmodal-sub": "Персонализирана фотография & природа", "pmodal-interests": "Основни интереси", "cb-birds": "Наблюдение на птици", "cb-photo": "Фотография", "cb-wildlife": "Дива природа & Флора", "cb-culture": "Култура & Наследство", "pmodal-time": "Предпочитан сезон / Дати", "pmodal-duration": "Желана продължителност", "pmodal-details": "Специални искания", "btn-send-private": "Изпратете запитване", "pthanks-title": "Запитването е получено", "pthanks-desc": "Ще разгледаме заявката ви и ще ви отговорим в рамките на 24 часа.", "program-label": "Програма на пътуването", "booking-step-1": "1. Изберете дати", "booking-step-2": "2. Информация за пътуващия", "label-name": "Три имена", "label-email": "Имейл адрес", "label-phone": "Телефон / WhatsApp", "label-guests": "Брой гости", "label-notes": "Специални изисквания", "btn-confirm-booking": "Потвърдете запитването", "booking-thanks-title": "Запитването е изпратено", "booking-thanks-desc": "Ще се свържем с вас по имейл в рамките на 24 часа.", "btn-close": "Затвори"
+        "page-title": "AVISIA.tours — Светът, видян различно", "tagline": "Светът, видян различно", "nav-journeys": "Дестинации", "nav-galleries": "Галерии", "nav-about": "За нас", "nav-stories": "Истории", "nav-faq": "ЧЗВ", "nav-contact": "Контакт", "hero-title": "Guided by nature, defined by detail.", "hero-desc": "Малки групи. Местни експерти. Забележителни места. От близки убежища до далечна тропическа дива природа, изследвани с търпение и цел.", "hero-btn": "Открийте дестинациите", "journeys-sub": "Селектирано портфолио", "journeys-title": "Дестинации", "tour1-meta": "Северна Гърция • 4 Дни", "tour1-title": "Езерото Керкини: Убежището на къдроглавия пеликан", "tour1-desc": "Ексклузивни лодки рано сутрин за фотографиране на пеликани.", "tour1-tag": "Птици & Изящно изкуство", "tour2-meta": "Черноморско крайбрежие • 5 Дни", "tour2-title": "Бургаските езера и крайбрежната миграция", "tour2-desc": "Плаване из солените лагуни по време на миграция.", "tour2-tag": "Лагуни & Миграция", "tour3-meta": "Рила Планина • 6 Дни", "tour3-title": "Алпийска Рила и висонинна фауна", "tour3-desc": "Алпийски пейзажи и фотографски преходи.", "tour3-tag": "Алпийски пейзажи", "tour4-meta": "Централна Америка • 11 Дни", "tour4-title": "Коста Рика: Сенките на тропическата гора", "tour4-desc": "От Кетцали в облачните гори до колибри и речни канали.", "tour4-tag": "Тропическо биоразнообразие", "tour5-meta": "Индийски океан • 12 Дни", "tour5-title": "Шри Ланка: Древни кралства и диви хоризонти", "tour5-desc": "Леопарди, слонове и ендемични птици в древни екосистеми.", "tour5-tag": "Големи бозайници & Джунгла", "book-now": "Програма & Записване →", "galleries-sub": "Визуално портфолио", "galleries-title": "Селектирани галерии", "filter-all": "Всички", "filter-avian": "Птици", "filter-wildlife": "Дива природа", "filter-portraits": "Портрети", "filter-urban": "Градска среда", "filter-landscapes": "Пейзажи", "filter-heritage": "Наследство", "view-album": "Имерсивен изглед", "about-sub": "Нашата философия", "about-title": "Дълбоки и непребързани преживявания.", "about-desc": "AVISIA е родена от желанието да предефинираме фотографските пътувания на Балканите. Отдалечаваме се от препускащите маршрути в полза на бавното и целенасочено изследване, водено от естествената светлина. Комбинирайки дълбоки екологични познания с търпение на терен, предлагаме интимни срещи с диви пейзажи и редки видове. Всяко пътуване е проектирано да насърчи дълбока връзка с природата, оставяйки време за автентично художествено изразяване.", "about-btn": "Заявете частно пътуване", "creator-btn": "Запознайте се с гида", "creator-modal-sub": "Основател & Водещ гид", "creator-modal-title": "Зад обектива: Визията и гидът", "stories-sub": "Редакционни & Пътни бележки", "stories-title": "Истории от терен", "read-story": "Прочетете историята →", "faq-sub": "Полезна информация", "faq-title": "Често задавани въпроси", "faq-desc": "Всичко, което трябва да знаете за нашите фотографски експедиции, препоръки за екипировка и логистика.", "faq-q1": "Каква фотографска техника е препоръчително да нося?", "faq-a1": "Препоръчваме фотоапарат с добро представяне при ниска светлина, телеобектив (поне 300mm–600mm) за птици и дива природа, както и широкоъгълен обектив (24–70mm) за пейзажи. Не забравяйте стабилен статив, допълнителни карти памет и батерии.", "faq-q2": "Колко големи са групите на фотографските турове?", "faq-a2": "За да осигурим персонално отношение и индивидуално наблюдение, групите са малки — обикновено ограничени до между 4 и 6 участника на водач.", "faq-q3": "Нужно ли е да съм професионален фотограф, за да се присъединя?", "faq-a3": "В никакъв случай! Нашите пътувания са подходящи както за любители и начинаещи, така и за опитни фотографи. Нашите водачи оказват съдействие спрямо вашето ниво.", "faq-q4": "Какво е физическото натоварване по време на маршрутите?", "faq-a4": "Повечето турове включват леко до умерено ходене по пресечен терен. Алпийските и тропическите експедиции могат да изискват по-дълги преходи, но се движим с умерено темпо, съобразено с фотографиите.", "faq-q5": "Как функционират частните персонализирани пътувания?", "faq-a5": "Можете да заявите индивидуален маршрут, съобразен изцяло с вашия график, търсени видове, темпо и предпочитано ниво на настаняване чрез нашата форма за Частно пътуване.", "reviews-sub": "Отзиви от пътешественици", "reviews-title": "Отзиви в TripAdvisor", "review1-text": "\"Имахме фантастичен ден в изследване на забележителни природни места край София. Нашият гид притежаваше изключителни познания за птиците и местната екология, което направи пътуването не само плодотворно за фотографията, но и изключително интересно.\"", "review1-loc": "TripAdvisor Пътешественик", "review2-text": "\"Внимание към детайла, отлична логистика и подборът на локации надхвърлиха очакванията ни. Насоките за перфектни кадри и възможността да се преживее дивата природа на България в най-добрата ѝ светлина бяха черешката на тортата.\"", "review2-loc": "TripAdvisor Пътешественик", "review3-text": "\"Невероятно изживяване сред дивата природа. Комбинацията от наблюдение на птици, местна култура и професионални фотографски прозрения направи това пътуване уникално.\"", "review3-loc": "TripAdvisor Пътешественик", "nl-sub": "Частен кръг & Пътни бележки", "nl-title": "Получавайте частни оферти и доклади от терен", "nl-desc": "Присъединете се към нашия бюлетин, за да получавате ранен достъп до бъдещи лимитирани експедиции, сезонни отчети и акценти от портфолиото директно във вашата поща.", "nl-placeholder": "Въведете вашия имейл...", "nl-btn": "Абонирайте се", "nl-success": "Благодарим ви, че се присъединихте към нашия частен кръг.", "partners-title": "Доверени партньори & Екипировка", "footer-desc": "Индивидуални фотографски пътувания из регионални пейзажи и световна дива природа.", "footer-nav": "Навигация", "footer-contact": "Директен контакт", "footer-rights": "© 2026 AVISIA.tours. ВСИЧКИ ПРАВА ЗАПАЗЕНИ.", "pmodal-title": "Заявете частно пътуване", "pmodal-sub": "Персонализирана фотография & природа", "pmodal-interests": "Основни интереси", "cb-birds": "Наблюдение на птици", "cb-photo": "Фотография", "cb-wildlife": "Дива природа & Флора", "cb-culture": "Култура & Наследство", "pmodal-time": "Предпочитан сезон / Дати", "pmodal-duration": "Желана продължителност", "pmodal-details": "Специални искания", "btn-send-private": "Изпратете запитване", "pthanks-title": "Запитването е получено", "pthanks-desc": "Ще разгледаме заявката ви и ще ви отговорим в рамките на 24 часа.", "program-label": "Програма на пътуването", "booking-step-1": "1. Изберете дати", "booking-step-2": "2. Информация за пътуващия", "label-name": "Три имена", "label-email": "Имейл адрес", "label-phone": "Телефон / WhatsApp", "label-guests": "Брой гости", "label-notes": "Специални изисквания", "btn-confirm-booking": "Потвърдете запитването", "booking-thanks-title": "Запитването е изпратено", "booking-thanks-desc": "Ще се свържем с вас по имейл в рамките на 24 часа.", "btn-close": "Затвори"
       }
     };
 
